@@ -1,1 +1,0 @@
-This file continuously accumulates tested attempts.

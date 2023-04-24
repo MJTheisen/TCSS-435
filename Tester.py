@@ -1,11 +1,15 @@
 import Board
 import Solver 
+
+#####################################
+#                                   #
+#         Michael Theisen           #
+#           TCSS 435 AI             #
+#           04/23/2023              #
+#                                   #
+#####################################
+
 # "A tester file that connects your Board and Solver code."
-#
-#
-#
-#
-################################
 #
 # REQUIRED
 # for (n = 2), the solution = ("213 ") ALWAYS. Rows move to the left in ascending order, but space is always BOTTOM RIGHT.
@@ -15,11 +19,6 @@ import Solver
 # EXTRA CREDIT
 # For (n > 4), the solution = ("(n*n)-1") I assume, rows moving right in ascending order, but where should the space be? Indication is not given. I will assume BOTTOM RIGHT.
 # implementation of unsolvability is last if time. It is not necessary.
-#
-################################
-
-
-
 
 def printState(size, initial, goal, searchmethod, depth):
     initialStr = "".join(str(i) for row in initial for i in row)
@@ -40,6 +39,7 @@ def printState(size, initial, goal, searchmethod, depth):
     file.write("\nsearchmethod: " + str(searchmethod))
     file.write("\n" + str(depth) + ", " + str(numCreated) + ", " + str(numExpanded) + ", " + str(maxFringe))
     file.write("\n----------------\n")
+
 promptInput=0
 
 while promptInput != 'q':
@@ -127,6 +127,10 @@ while promptInput != 'q':
         numExpanded = Solver.DFS(initial, goal)[2]
         maxFringe = Solver.DFS(initial, goal)[3]
         solution = Solver.DFS(initial, goal)
+
+
+
+        
     print() 
     if solution:
         printState(size, initial, goal, searchmethod, depth)

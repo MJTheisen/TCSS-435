@@ -1,5 +1,14 @@
 import Board
-#import Tester
+
+#####################################
+#                                   #
+#         Michael Theisen           #
+#           TCSS 435 AI             #
+#           04/23/2023              #
+#                                   #
+#####################################
+
+
 # " Source code that implements BFS, DFS, GBFS, AStar to solve n-by-n sliding puzzle."
 
 # Under the assumption that we do not have to worry about checking if the puzzle is 

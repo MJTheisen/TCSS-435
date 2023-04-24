@@ -1,5 +1,12 @@
-#import Solver
-#import Tester
+#####################################
+#                                   #
+#         Michael Theisen           #
+#           TCSS 435 AI             #
+#           04/23/2023              #
+#                                   #
+#####################################
+
+
 # Source code that models an n-by-n board with sliding tiles. 
 # Your heuristic function resides in this file.  
 

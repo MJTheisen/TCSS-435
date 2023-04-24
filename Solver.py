@@ -67,7 +67,7 @@ def DFS(initial, goal):
                 numCreated += 1
             # To remove the likelihood of cycles, we skip visited nodes and just continue on.    
             else:
-                continue          
+                break          
     return -1, numCreated, numExpanded, maxFringe
 
 # Greedy Best First Search based on textbook page 100.

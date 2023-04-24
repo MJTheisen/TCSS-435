@@ -133,6 +133,12 @@ while promptInput != 'q':
         numExpanded = Solver.GBFS(initial, goal)[2]
         maxFringe = Solver.GBFS(initial, goal)[3]
         solution = Solver.GBFS(initial, goal)
+    if searchmethod == 'AStar':
+        depth = Solver.AStar(initial, goal)[0]
+        numCreated = Solver.AStar(initial, goal)[1]
+        numExpanded = Solver.AStar(initial, goal)[2]
+        maxFringe = Solver.AStar(initial, goal)[3]
+        solution = Solver.AStar(initial, goal)
 
 
 

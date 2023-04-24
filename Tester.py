@@ -127,10 +127,16 @@ while promptInput != 'q':
         numExpanded = Solver.DFS(initial, goal)[2]
         maxFringe = Solver.DFS(initial, goal)[3]
         solution = Solver.DFS(initial, goal)
+    if searchmethod == 'GBFS':
+        depth = Solver.GBFS(initial, goal)[0]
+        numCreated = Solver.GBFS(initial, goal)[1]
+        numExpanded = Solver.GBFS(initial, goal)[2]
+        maxFringe = Solver.GBFS(initial, goal)[3]
+        solution = Solver.GBFS(initial, goal)
 
 
 
-        
+
     print() 
     if solution:
         printState(size, initial, goal, searchmethod, depth)

@@ -1,5 +1,5 @@
 import Board
-from queue import PriorityQueue
+import heapq
 
 #####################################
 #                                   #
@@ -85,22 +85,23 @@ def DFS(initial, goal):
     return -1, numCreated, numExpanded, maxFringe
 
 # Greedy Best First Search based on textbook page 100. Its still kind of like BFS, but I'm
-# going to use a PriorityQueue and pass in a heuristic argument.
 
-def GBFS(initial, goal, heuristic):
+# Duplication of BFS for now.
+def GBFS(initial, goal):
     visited = set([tuple(map(tuple, initial))])
-    # Adding a queue like BFs, but PriorityQueue now.
-    queue = PriorityQueue()
-    # I want to add the heuristic on page 104 using Manhattan Distance
-    queue.put((heuristic(initial, goal), (initial, 0)))
+    queue = [(initial, 0)]
+    # Added node counter. 
     numCreated = 0
+    # Added expansion counter that failed.
     numExpanded = 0
-    maxFringe = 1
-    while not queue.empty():
+    # Added maximum Fringe size counter.
+    maxFringe = 0
+    while queue:
         # Increment max Fringe if Fringe gets bigger than previous Fringe
-        if queue.qsize() > maxFringe:
-            maxFringe = queue.qsize()
-        state, depth = queue.get()[1]
+        if len(queue) > maxFringe:
+            maxFringe = len(queue)
+        # Added depth
+        state, depth = queue.pop(0)
         # Increment based on dequeues
         numExpanded += 1
         if Board.getStateString(state) == Board.getStateString(goal):
@@ -108,15 +109,75 @@ def GBFS(initial, goal, heuristic):
         for neighbor in Board.getNeighbors(state):
             if tuple(map(tuple, neighbor)) not in visited:
                 visited.add(tuple(map(tuple, neighbor)))
-                queue.put((heuristic(neighbor, goal), (neighbor, depth + 1)))
+                # Increment depth
+                queue.append((neighbor, depth + 1))
                 # Increment node counter
                 numCreated += 1          
     return -1, numCreated, numExpanded, maxFringe
 
-# A* Search based on textbook page 100.
-def AStar():
+# def GBFS(initial, goal):
+#     pq = [(Board.heuristic(initial, goal), initial, 0)]
+#     visited = set([tuple(map(tuple, initial))])
+#     numCreated = 0
+#     numExpanded = 0
+#     maxFringe = 0
+#     while pq:
+#         if len(pq) > maxFringe:
+#             maxFringe = len(pq)
+#         state = heapq.heappop(pq)[1]
+#         numExpanded += 1
+#         if state == goal:
+#             return Board.heuristic(state, goal), numCreated, numExpanded, maxFringe
+#         for neighbor in Board.getNeighbors(state):
+#             if tuple(map(tuple, neighbor)) not in visited:
+#                 visited.add(tuple(map(tuple, neighbor)))
+#                 numCreated += 1
+#                 heapq.heappush(pq, (Board.heuristic(neighbor, goal), neighbor, 0))
+#     return -1, numCreated, numExpanded, maxFringe
 
+# Duplicate of BFS for now. so that it stops crashing.
+def AStar(initial, goal):
+    visited = set([tuple(map(tuple, initial))])
+    queue = [(initial, 0)]
+    # Added node counter. 
+    numCreated = 0
+    # Added expansion counter that failed.
+    numExpanded = 0
+    # Added maximum Fringe size counter.
+    maxFringe = 0
+    while queue:
+        # Increment max Fringe if Fringe gets bigger than previous Fringe
+        if len(queue) > maxFringe:
+            maxFringe = len(queue)
+        # Added depth
+        state, depth = queue.pop(0)
+        # Increment based on dequeues
+        numExpanded += 1
+        if Board.getStateString(state) == Board.getStateString(goal):
+            return depth, numCreated, numExpanded, maxFringe
+        for neighbor in Board.getNeighbors(state):
+            if tuple(map(tuple, neighbor)) not in visited:
+                visited.add(tuple(map(tuple, neighbor)))
+                # Increment depth
+                queue.append((neighbor, depth + 1))
+                # Increment node counter
+                numCreated += 1          
+    return -1, numCreated, numExpanded, maxFringe
 
-
-
-    return
+    
+# def AStar(initial, goal):
+#     pq = [(0 + heuristic(initial, goal), initial, 0, [])]
+#     visited = set() 
+#     while pq:
+#         # Sort queue so that lowest cost states are expanded first
+#         pq.sort() 
+#         # Get state with lowest cost from queue
+#         state = pq.pop(0) 
+#         current, depth, path = state[1], state[2], state[3] # unpack state values
+#         visited.add(tuple(current)) # mark current state as visited
+#         if current == goal:
+#             return (depth, path + [current]) # goal state found, return depth and path to it
+#         for neighbor in Board.neighbors(current):
+#             if tuple(neighbor) not in visited:
+#                 pq.append((depth + 1 + Board.heuristic(neighbor, goal), neighbor, depth + 1, path + [current])) # add neighbor to queue
+#     return None # goal state not found, return None

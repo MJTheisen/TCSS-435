@@ -1,3 +1,4 @@
+
 #####################################
 #                                   #
 #         Michael Theisen           #
@@ -35,3 +36,17 @@ def getNeighbors(state):
 def getStateString(state):
     return ''.join(str(num) for row in state for num in row)
 
+
+# The heuristic is as follows:
+# Manhattan Distance
+
+def heuristic(state, goal):
+    distance = 0
+    for i in range(len(state)):
+        for j in range(len(state)):
+            if state[i][j] == 0:
+                continue
+            val = state[i][j]
+            xGoal, yGoal = divmod(goal.index(val), len(goal))
+            distance += abs(i - xGoal) + abs(j - yGoal)
+    return distance

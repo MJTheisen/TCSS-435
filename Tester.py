@@ -32,11 +32,12 @@ def printState(size, initial, goal, searchmethod, depth):
     initialStr = "".join(str(i) for row in initial for i in row)
     goalStr = "".join(str(i) for row in goal for i in row)
 
-    print(f'{"size:"} + {size}')
-    print(f'{"initial"} + {initialStr}"')
-    print(f'{"goal: "} + {goalStr}"')  
-    print(f'{searchmethod}')
-    print(f'{depth}')
+    print(f'{"size:"}  {size}')
+    print(f'{"initial"}  {initialStr}"')
+    print(f'{"goal: "}  "{goalStr}"')  
+    print(f'{"searchmethod: "} {searchmethod}')
+    print(f'{depth} ", " {numCreated} ", " {numExpanded} ", " {maxFringe}')
+
 
 
 # Print input request to console
@@ -45,9 +46,12 @@ print()
 print("Type 'q' to exit and print to Readme.txt file.\nEnter Input of the form: [size] " + '"[initial state]" ' + "[search method]")
 print()
 promptInput = input("Input: ")
-size, newInitial, searchmethod = promptInput.split()
+size, newInitial1, newInitial2, searchmethod = promptInput.split()
+quotesInitial = newInitial1 + ' ' + newInitial2 
+newInitial = quotesInitial[1:-1]
+
 # Convert the input string to a list of characters
-n=size
+n = int(size)
 charList = list(newInitial)
 
 # Define an empty list to hold the sublists
@@ -102,8 +106,9 @@ if n == 4:
 # of size n > 4.
 # if n > 4:
 
-searchmethod = "BFS"
+
 depth = Solver.BFS(initial, goal)
+
 solution = Solver.BFS(initial, goal)
 
 
@@ -120,8 +125,7 @@ while promptInput != 'q':
     # print()
 
 
-    promptInput = input("Input: ")
-    size, newinitial, searchmethod = promptInput.split()    
+        
     if solution:
         printState(size, initial, goal, searchmethod, depth)
         print()
@@ -142,4 +146,7 @@ while promptInput != 'q':
         file.write("\n----------------\n")
     else:
         print("No solution found")
+
+    # promptInput = input("Input: ")
+    # size, newInitial, searchmethod = promptInput.split()   
 

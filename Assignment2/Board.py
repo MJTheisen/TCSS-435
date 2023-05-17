@@ -1,6 +1,4 @@
 import random
-import math
-#import Solver
 
 class GameBoard:
     def __init__(self, rows, columns):
@@ -35,74 +33,9 @@ class GameBoard:
                     successorStates.append(successor)
         return successorStates
 
-    # def isWin(self, symbol):
-    #     for row in range(self.rows):
-    #         for column in range(self.columns):
-    #             if self.isEmpty(row, column):
-    #                 return False
-    #     return True
-
-    # def isGameOver(self):
-    #     # check if the board is full
-    #     if self.isBoardFull():
-    #         return True
-
-    #     # check for winning configurations 
-    #     if self.countWinningConfigurations('O') > 0 or self.countWinningConfigurations('X') > 0:
-    #         return True
-
-    #     return False
-    
-    # def isBoardFull(self):
-    #     for row in self.board:
-    #         for cell in row:
-    #             if cell == ' ':
-    #                 return False
-    #     return True
-
-def getPlayerMove(board, symbol):
-    while True:
-        try:
-            move = input("Input GAMEMOVE ""r/c"" : ")
-            row, column = map(int, move.split('/'))
-            row -= 1
-            column -= 1
-            if (
-                0 <= row < board.rows
-                and 0 <= column < board.columns
-                and board.isEmpty(row, column)
-            ):
-                return row, column
-            else:
-                print("Invalid move. Try again.")
-        except ValueError:
-            print("Invalid input. Try again.")
-
-def getPlayerSymbol(playerNumber):
-    if playerNumber == 1:
-        return 'O'
-    elif playerNumber == 2:
-        return 'X'
-    else:
-        raise ValueError("Invalid player number.")
-
-def getBoardSize():
-    while True:
-        try:
-            inputStr = input("Input ""[player] [searchmethod] [size]"": ")
-            playerNumber, size = inputStr.split()
-            playerNumber = int(playerNumber)
-            rows, columns = map(int, size.split('*'))
-            return playerNumber, rows, columns
-        except ValueError:
-            print("Invalid input. Try again.")
-
-
-
-playerNumber, boardRows, boardColumns = getBoardSize()
-playerSymbol = getPlayerSymbol(playerNumber)
-
-print(f"Player 1: {'Human' if playerNumber == 1 else 'AI'}")
-print(f"Player 2: {'Human' if playerNumber == 2 else 'AI'}")
-print()
-print()
+    def isWin(self, symbol):
+        for row in range(self.rows):
+            for column in range(self.columns):
+                if self.isEmpty(row, column):
+                    return False
+        return True
